@@ -1,0 +1,59 @@
+
+buildscript {
+    repositories {
+        flatDir dirs: 'repo'
+    }
+    dependencies {
+        classpath ':proguard:5.2'
+    }
+}
+
+dependencies {
+}
+
+task obfuscate(type: proguard.gradle.ProGuardTask) {
+    // Specify the input jars, output jars, and library jars
+    injars 'build/libs/secpro-mlr02-j.jar'
+    outjars 'build/libs/secpro-mlr02-j-obfuscated.jar'
+    libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+
+    // Save the obfuscation mapping to a file, so you can de-obfuscate any stack
+    // traces later on. Keep a fixed source file attribute and all line number
+    // tables to get line numbers in the stack traces.
+    // You can comment this out if you're not interested in stack traces.
+    printmapping 'build/out.map'
+    renamesourcefileattribute 'SourceFile'
+    keepattributes 'SourceFile,LineNumberTable'
+
+    // Preserve all annotations.
+    keepattributes '*Annotation*'
+
+    // Allow methods with the same signature, except for the return type,
+    // to get the same obfuscation name
+    overloadaggressively
+
+    // Put all obfuscated classes into the nameless root package
+    repackageclasses ''
+
+    // Allow classes and class members to be made public
+    allowaccessmodification
+
+    // Preserve all public applications
+    keepclasseswithmembers 'public class * { \
+        public static void main(java.lang.String[]); \
+    }'
+
+    // Preserve the special static methods that are required in all enumeration classes
+    keepclassmembers allowshrinking: true, 'enum * { \
+        public static **[] values(); \
+        public static ** valueOf(java.lang.String); \
+    }'
+
+    // Your application may contain more items that need to be preserved;
+    // typically classes that are dynamically created using Class.forName:
+    // keep 'public class mypackage.MyClass'
+    // keep 'public interface mypackage.MyInterface'
+    // keep 'public class * implements mypackage.MyInterface'
+}
+
+build.dependsOn obfuscate

@@ -1,0 +1,25 @@
+
+dependencies {
+}
+
+jar {
+    manifest {
+        // attributes 'Name': 'de/qaware/campus/secpro/env01/'
+        attributes 'Sealed': 'true'
+    }
+}
+
+task testJar(type: Jar) {
+    classifier = 'tests'
+    from sourceSets.test.output
+}
+
+jar.doLast {
+    new File('build/signed').mkdirs()
+    ant.signjar(jar: 'build/libs/secpro-env01-j.jar',
+            signedjar: 'build/libs/secpro-env01-j-signed.jar',
+            alias: 'selfsigned',
+            keystore: 'keystore.jks',
+            storepass: 'password',
+            preservelastmodified: 'true')
+}

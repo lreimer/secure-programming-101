@@ -1,0 +1,7 @@
+include ':secpro-env01-j'
+include ':secpro-mlr01-j'
+include ':secpro-mlr02-j'
+include ':secpro-msc03-j'
+include ':secpro-owasp-check'
+
+rootProject.name = 'secure-programming-101'
