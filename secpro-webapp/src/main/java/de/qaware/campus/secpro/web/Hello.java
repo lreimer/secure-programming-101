@@ -25,6 +25,7 @@ package de.qaware.campus.secpro.web;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import java.util.Objects;
 
 /**
  * A simple request scoped named Hello model. Actually the example
@@ -38,6 +39,9 @@ public class Hello {
     @Inject
     private Greeting greeting;
 
+    @Inject
+    private MasterPassword masterPassword;
+
     private String name;
 
     public String getName() {
@@ -50,5 +54,9 @@ public class Hello {
 
     public String getGreeting() {
         return greeting.getMessage(name);
+    }
+
+    public String getMasterPassword() {
+        return Objects.toString(masterPassword);
     }
 }
