@@ -9,6 +9,6 @@ import javax.ws.rs.core.Application;
  * @author mario-leander.reimer
  */
 @ApplicationPath("api")
-public class SecureRestAPI extends Application {
+public class HelloRestAPI extends Application {
 
 }
