@@ -1,4 +1,5 @@
 include ':secpro-env01-j'
+include ':secpro-jvm-agent'
 include ':secpro-mlr01-j'
 include ':secpro-mlr02-j'
 include ':secpro-msc03-j'

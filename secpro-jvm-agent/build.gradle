@@ -1,0 +1,27 @@
+dependencies {
+    compile 'org.ow2.asm:asm:5.0.3'
+    compile 'org.ow2.asm:asm-tree:5.0.3'
+    compile 'com.google.guava:guava:14.0.1'
+
+    testRuntime 'org.ow2.asm:asm-util:5.0.3'
+}
+
+jar {
+    manifest {
+        attributes 'Premain-Class': 'de.qaware.campus.secpro.agent.TrojanSecretAgent'
+        attributes 'Agent-Class': 'de.qaware.campus.secpro.agent.TrojanSecretAgent'
+        attributes 'Boot-Class-Path': 'asm-5.0.3.jar asm-tree-5.0.3.jar guava-14.0.1.jar'
+    }
+}
+
+task asmifyOriginal(type: JavaExec) {
+    main = 'org.objectweb.asm.util.ASMifier'
+    args 'de.qaware.campus.secpro.agent.impl.LoginServiceImpl'
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+task asmifyModified(type: JavaExec) {
+    main = 'org.objectweb.asm.util.ASMifier'
+    args 'de.qaware.campus.secpro.agent.impl.EavesdropLoginServiceImpl'
+    classpath = sourceSets.test.runtimeClasspath
+}
