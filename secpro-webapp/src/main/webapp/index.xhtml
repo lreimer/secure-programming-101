@@ -19,9 +19,11 @@
                      requiredMessage="Error: A name is required."
                      maxlength="25"/>
 
-        <p></p>
+        <br/>
         <h:commandButton id="submit" value="Submit" action="response"/>
         <h:commandButton id="reset" value="Reset" type="reset"/>
     </h:form>
+    <br/>
+    <h:outputText style="color: red;" value="Master password: #{hello.masterPassword}"/>
 </h:body>
 </html>

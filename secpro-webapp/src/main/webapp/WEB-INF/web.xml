@@ -27,5 +27,9 @@
         <exception-type>javax.validation.ConstraintViolationException</exception-type>
         <location>/400.xhtml</location>
     </error-page>
+    <error-page>
+        <exception-type>java.lang.SecurityException</exception-type>
+        <location>/403.xhtml</location>
+    </error-page>
 
 </web-app>
