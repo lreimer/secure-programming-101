@@ -1,8 +1,16 @@
 apply plugin: 'war'
 
+repositories {
+    flatDir { dirs 'repo' }
+    mavenCentral()
+}
+
 dependencies {
 	// providedCompile 'javax:javaee-api:7.0'
 	providedCompile 'javax:javaee-web-api:7.0'
+
+    compile 'commons-codec:commons-codec:1.10'
+    compile ':commons-crypto:1.0'
 
     compile 'org.apache.deltaspike.core:deltaspike-core-api:1.5.0'
     compile 'org.apache.deltaspike.core:deltaspike-core-impl:1.5.0'
