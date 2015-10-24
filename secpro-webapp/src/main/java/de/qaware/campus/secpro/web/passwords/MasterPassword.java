@@ -1,4 +1,4 @@
-package de.qaware.campus.secpro.web;
+package de.qaware.campus.secpro.web.passwords;
 
 import javax.enterprise.inject.Alternative;
 
