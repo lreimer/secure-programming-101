@@ -38,7 +38,14 @@ public class Passwords {
     @Inject
     private MasterPassword masterPassword;
 
+    @Inject
+    private SecurePasswords securePasswords;
+
     public String getMasterPassword() {
         return Objects.toString(masterPassword);
+    }
+
+    public String getSecurePassword() {
+        return securePasswords.getDecryptedSecurePassword();
     }
 }

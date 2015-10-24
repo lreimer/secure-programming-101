@@ -23,36 +23,21 @@
  */
 package de.qaware.campus.secpro.web.passwords;
 
-import javax.enterprise.inject.Alternative;
+import org.apache.deltaspike.core.api.config.PropertyFileConfig;
 
 /**
- * A simple utility class to obtain the master password.
- * <p>
- * The master password is stored in a glassfish password alias, and
- * passed in via a standard Java system property.
- * <p>
- * -Dde.qaware.campus.secpro.password=${ALIAS=secpro_password_alias}
- * <p>
- * You need to create the password alias using asadmin create-password-alias
- * command for your Glassfish domain.
+ * A DeltaSpike property file configuration.
  *
  * @author mario-leander.reimer
  */
-@Alternative
-final class MasterPassword {
-    /**
-     * Returns the master password instance.
-     */
-    public static final MasterPassword INSTANCE = new MasterPassword();
-
-    /**
-     * No instantiation.
-     */
-    private MasterPassword() {
+public class PasswordPropertyFileConfig implements PropertyFileConfig {
+    @Override
+    public String getPropertyFileName() {
+        return "/password.properties";
     }
 
     @Override
-    public String toString() {
-        return System.getProperty("de.qaware.campus.secpro.password");
+    public boolean isOptional() {
+        return false;
     }
 }

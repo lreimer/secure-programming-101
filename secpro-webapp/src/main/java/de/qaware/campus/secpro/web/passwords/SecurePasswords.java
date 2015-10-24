@@ -25,6 +25,7 @@ package de.qaware.campus.secpro.web.passwords;
 
 import de.qaware.commons.crypto.*;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.deltaspike.core.api.config.ConfigProperty;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -45,6 +46,10 @@ public class SecurePasswords {
     private MasterPassword masterPassword;
     private Salt salt;
 
+    @Inject
+    @ConfigProperty(name = "secure.password")
+    private String securePassword;
+
     /**
      * Default constructor.
      */
@@ -64,6 +69,15 @@ public class SecurePasswords {
     public void initialize() {
         String saltBase64 = Base64.encodeBase64String(new byte[]{'s', 'a', 'l', 't'});
         salt = Salt.fromBase64(saltBase64);
+    }
+
+    /**
+     * Returns the decrypted secure password property.
+     *
+     * @return the decrypted password
+     */
+    public String getDecryptedSecurePassword() {
+        return decrypt(securePassword);
     }
 
     /**
