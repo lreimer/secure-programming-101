@@ -48,7 +48,7 @@ public class DownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String src = req.getParameter("src");
 
-        File file = new File(getServletContext().getRealPath("/"), "/WEB-INF/resources/" + src);
+        File file = new File(getServletContext().getRealPath("/"), "/" + src);
         if (file.exists() && file.canRead() && file.isFile()) {
             FileInputStream inputStream = new FileInputStream(file);
             try {
