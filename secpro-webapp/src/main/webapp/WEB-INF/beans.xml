@@ -5,7 +5,7 @@
        bean-discovery-mode="all">
 
     <decorators>
-        <class>de.qaware.campus.secpro.web.GreetingSecurityDecorator</class>
+        <class>de.qaware.campus.secpro.web.hello.GreetingSecurityDecorator</class>
     </decorators>
 
 </beans>

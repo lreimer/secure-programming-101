@@ -21,24 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.qaware.campus.secpro.web;
+package de.qaware.campus.secpro.web.hello;
 
-import javax.validation.constraints.NotNull;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.validation.constraints.Size;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
- * A Greeting component interface definition.
- *
- * @author mario-leander.reimer
+ * Our simple Hello resources.
  */
-public interface Greeting {
-    /**
-     * Returns a Greeting for the given name. The actual greeting
-     * may depend on implementation.
-     *
-     * @param name the name, at least 3 characters
-     * @return the greeting message
-     */
-    @NotNull
-    String getMessage(@Size(min = 3) String name);
+@Path("/hello")
+@RequestScoped
+public class HelloResource {
+
+    @Inject
+    private Greeting greeter;
+
+    @GET
+    @Produces("text/plain")
+    public String sayHello(@QueryParam("name") @Size(min = 3) String name) {
+        return greeter.getMessage(name);
+    }
 }

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.qaware.campus.secpro.web;
+package de.qaware.campus.secpro.web.hello;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.validation.constraints.NotNull;

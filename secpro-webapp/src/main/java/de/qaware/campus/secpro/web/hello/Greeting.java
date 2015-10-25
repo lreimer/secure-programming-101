@@ -21,35 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.qaware.campus.secpro.web;
+package de.qaware.campus.secpro.web.hello;
 
-import javax.enterprise.inject.Model;
-import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
- * A simple request scoped named Hello model. Actually the example
- * is taken from the official JavaEE 7 tutorial.
+ * A Greeting component interface definition.
  *
  * @author mario-leander.reimer
  */
-@Model
-public class Hello {
-
-    @Inject
-    private Greeting greeting;
-
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGreeting() {
-        return greeting.getMessage(name);
-    }
-
+public interface Greeting {
+    /**
+     * Returns a Greeting for the given name. The actual greeting
+     * may depend on implementation.
+     *
+     * @param name the name, at least 3 characters
+     * @return the greeting message
+     */
+    @NotNull
+    String getMessage(@Size(min = 3) String name);
 }

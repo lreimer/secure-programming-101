@@ -21,39 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.qaware.campus.secpro.web;
+package de.qaware.campus.secpro.web.hello;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.validation.Validator;
-import javax.validation.constraints.Size;
 
 /**
- * This decorator takes care of our Greeting security. In here you can
- * implement any required normalization and sanitization.
+ * A simple request scoped named Hello model. Actually the example
+ * is taken from the official JavaEE 7 tutorial.
  *
  * @author mario-leander.reimer
  */
-@Decorator
-public class GreetingSecurityDecorator implements Greeting {
+@Model
+public class Hello {
 
     @Inject
-    @Delegate
-    private Greeting greeter;
+    private Greeting greeting;
 
-    @Inject
-    private Validator validator;
+    private String name;
 
-    @Override
-    public String getMessage(@Size(min = 3) String name) {
-        // do some security checks, maybe even with the help
-        // of the javax.validation.Validator instance for PJOs
-        if ("attacker".equalsIgnoreCase(name)) {
-            throw new SecurityException("No attackers permitted.");
-        }
-
-        // continue and delegate
-        return greeter.getMessage(name);
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGreeting() {
+        return greeting.getMessage(name);
+    }
+
 }

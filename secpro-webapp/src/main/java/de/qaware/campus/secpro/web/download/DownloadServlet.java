@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.qaware.campus.secpro.web;
+package de.qaware.campus.secpro.web.download;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

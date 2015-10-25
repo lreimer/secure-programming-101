@@ -21,29 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.qaware.campus.secpro.web;
+package de.qaware.campus.secpro.web.hello;
 
-import javax.enterprise.context.RequestScoped;
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
 import javax.inject.Inject;
+import javax.validation.Validator;
 import javax.validation.constraints.Size;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 
 /**
- * Our simple Hello resources.
+ * This decorator takes care of our Greeting security. In here you can
+ * implement any required normalization and sanitization.
+ *
+ * @author mario-leander.reimer
  */
-@Path("/hello")
-@RequestScoped
-public class HelloResource {
+@Decorator
+public class GreetingSecurityDecorator implements Greeting {
 
     @Inject
+    @Delegate
     private Greeting greeter;
 
-    @GET
-    @Produces("text/plain")
-    public String sayHello(@QueryParam("name") @Size(min = 3) String name) {
+    @Inject
+    private Validator validator;
+
+    @Override
+    public String getMessage(@Size(min = 3) String name) {
+        // do some security checks, maybe even with the help
+        // of the javax.validation.Validator instance for PJOs
+        if ("attacker".equalsIgnoreCase(name)) {
+            throw new SecurityException("No attackers permitted.");
+        }
+
+        // continue and delegate
         return greeter.getMessage(name);
     }
 }
