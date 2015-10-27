@@ -40,6 +40,9 @@ public final class UnmodifiableLoginApp {
     public static void main(String[] args) {
         Console console = System.console();
 
+        CertificateVerifier verifier = new CertificateVerifier();
+        verifier.verify(UnmodifiableLoginApp.class);
+
         String username = console.readLine("Enter username: ");
         char[] password = console.readPassword("Enter password: ");
 

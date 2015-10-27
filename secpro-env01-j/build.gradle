@@ -6,6 +6,7 @@ jar {
     manifest {
         // attributes 'Name': 'de/qaware/campus/secpro/env01/'
         attributes 'Sealed': 'true'
+        attributes 'Main-Class': 'de.qaware.campus.secpro.env01.UnmodifiableLoginApp'
     }
 }
 
@@ -19,7 +20,7 @@ jar.doLast {
     ant.signjar(jar: 'build/libs/secpro-env01-j.jar',
             signedjar: 'build/libs/secpro-env01-j-signed.jar',
             alias: 'selfsigned',
-            keystore: 'keystore.jks',
+            keystore: 'src/main/resources/keystore.jks',
             storepass: 'password',
             preservelastmodified: 'true')
 }
