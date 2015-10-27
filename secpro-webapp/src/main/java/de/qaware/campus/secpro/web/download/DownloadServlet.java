@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -48,16 +47,14 @@ public class DownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String src = req.getParameter("src");
 
+        // translate src parameter to full file system path
         File file = new File(getServletContext().getRealPath("/"), "/" + src);
-        if (file.exists() && file.canRead() && file.isFile()) {
-            FileInputStream inputStream = new FileInputStream(file);
-            try {
-                Files.copy(file.toPath(), resp.getOutputStream());
-            } finally {
-                inputStream.close();
-            }
 
+        if (file.exists() && file.canRead() && file.isFile()) {
+            // copy file contents to servlet output stream
+            Files.copy(file.toPath(), resp.getOutputStream());
         } else {
+            // the file does not exist
             resp.sendError(404);
         }
     }
