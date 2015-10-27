@@ -26,6 +26,8 @@ package de.qaware.campus.secpro.web.passwords;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The passwords JSF model bean.
@@ -35,11 +37,16 @@ import java.util.Objects;
 @Model
 public class Passwords {
 
+    private static final Logger LOGGER = Logger.getLogger(Passwords.class.getName());
+
     @Inject
     private MasterPassword masterPassword;
 
     @Inject
     private SecurePasswords securePasswords;
+
+    @Inject
+    private CertificateVerifier verifier;
 
     public String getMasterPassword() {
         return Objects.toString(masterPassword);
@@ -47,5 +54,17 @@ public class Passwords {
 
     public String getSecurePassword() {
         return securePasswords.getDecryptedSecurePassword();
+    }
+
+    public boolean isCertificateValid() {
+        boolean valid;
+        try {
+            verifier.verify(getClass());
+            valid = true;
+        } catch (SecurityException e) {
+            LOGGER.log(Level.WARNING, "Error validating certificate.", e);
+            valid = false;
+        }
+        return valid;
     }
 }

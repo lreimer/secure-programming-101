@@ -64,7 +64,7 @@ public class SecurePasswordsTest {
     }
 
     @Test
-    public void testDummyEncryptionDecryption() throws Exception {
+    public void testMasterEncryptionDecryption() throws Exception {
         Key key = Key.fromPassword(MASTER_PASSWORD.toCharArray(), salt, 42);
 
         // encrypt the super secure password
@@ -78,5 +78,22 @@ public class SecurePasswordsTest {
         Plaintext decoded = CryptoUtil.decrypt(key, ciphertextOut);
         String decrypted = decoded.asUtf8String();
         assertEquals(decrypted, MY_SUPER_SECURE_PASSWORD);
+    }
+
+    @Test
+    public void testPasswordEncryptionDecryption() throws Exception {
+        Key key = Key.fromPassword(MASTER_PASSWORD.toCharArray(), salt, 42);
+
+        // encrypt the super secure password
+        Plaintext plaintext = Plaintext.fromString("password");
+        Ciphertext ciphertextIn = CryptoUtil.encrypt(key, plaintext);
+        String ciphertextInAsString = ciphertextIn.toBase64();
+        assertNotNull(ciphertextInAsString);
+
+        // Use fromBase64() to decode a ciphertext from Base64
+        Ciphertext ciphertextOut = Ciphertext.fromBase64(ciphertextInAsString);
+        Plaintext decoded = CryptoUtil.decrypt(key, ciphertextOut);
+        String decrypted = decoded.asUtf8String();
+        assertEquals(decrypted, "password");
     }
 }
