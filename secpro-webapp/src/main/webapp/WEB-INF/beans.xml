@@ -9,7 +9,7 @@
     </interceptors>
 
     <decorators>
-        <class>de.qaware.campus.secpro.web.hello.GreetingSecurityDecorator</class>
+        <class>de.qaware.campus.secpro.web.hello.NoGreetingToAttackersDecorator</class>
     </decorators>
 
 </beans>

@@ -41,7 +41,6 @@ import static java.lang.annotation.ElementType.TYPE;
  *
  * @author mario-leander.reimer
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target({TYPE, METHOD})
 @InterceptorBinding

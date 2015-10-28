@@ -26,7 +26,6 @@ package de.qaware.campus.secpro.web.hello;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
-import javax.validation.Validator;
 import javax.validation.constraints.Size;
 
 /**
@@ -35,23 +34,22 @@ import javax.validation.constraints.Size;
  *
  * @author mario-leander.reimer
  */
+
 @Decorator
-public class GreetingSecurityDecorator implements Greeting {
+public class NoGreetingToAttackersDecorator implements Greeting {
 
     @Inject
     @Delegate
     private Greeting greeter;
 
-    @Inject
-    private Validator validator;
-
     @Override
     public String getMessage(@Size(min = 3) String name) {
-        // do some security checks, maybe even with the help
-        // of the javax.validation.Validator instance for PJOs
         if ("attacker".equalsIgnoreCase(name)) {
-            throw new SecurityException("No attackers permitted.");
+            throw new SecurityException("No greeting for evil attackers.");
         }
+
+        // do some additional specific security checks
+        // maybe use a javax.validation.Validator for this
 
         // continue and delegate
         return greeter.getMessage(name);

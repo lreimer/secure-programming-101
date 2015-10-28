@@ -26,6 +26,7 @@ package de.qaware.campus.secpro.web.security;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -35,10 +36,9 @@ import java.util.Arrays;
  *
  * @author mario-leander.reimer
  */
-
 @Interceptor
 @Sanitized
-public class SanitizedInterceptor {
+public class SanitizedInterceptor implements Serializable {
 
     @AroundInvoke
     public Object invoke(InvocationContext ctx) throws Exception {

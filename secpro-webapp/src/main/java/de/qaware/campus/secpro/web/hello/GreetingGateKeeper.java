@@ -25,8 +25,9 @@ package de.qaware.campus.secpro.web.hello;
 
 import de.qaware.campus.secpro.web.security.Sanitized;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -38,8 +39,8 @@ import static de.qaware.campus.secpro.web.security.Sanitized.Type.ECMA_SCRIPT;
  *
  * @author mario-leander.reimer
  */
-@ApplicationScoped
-public class GreetingGateKeeper {
+@SessionScoped
+public class GreetingGateKeeper implements Serializable {
 
     @Inject
     private Greeting greeting;
