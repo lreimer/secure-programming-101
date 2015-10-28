@@ -71,6 +71,7 @@ public class CertificateVerifier {
      * @param clazz the clazz
      * @throws SecurityException if the verification fails
      */
+
     public void verify(Class<?> clazz) throws SecurityException {
         Certificate[] certificates = clazz.getProtectionDomain().getCodeSource().getCertificates();
         if (certificates == null || certificates.length == 0) {
@@ -91,4 +92,6 @@ public class CertificateVerifier {
             throw new SecurityException(e);
         }
     }
+
+
 }

@@ -41,13 +41,15 @@ import java.nio.file.Files;
  *
  * @author mario-leander.reimer
  */
+
 @WebServlet(name = "DownloadServlet", urlPatterns = "/download")
 public class DownloadServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String src = req.getParameter("src");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
         // translate src parameter to full file system path
+        String src = req.getParameter("src");
         File file = new File(getServletContext().getRealPath("/"), "/" + src);
 
         if (file.exists() && file.canRead() && file.isFile()) {

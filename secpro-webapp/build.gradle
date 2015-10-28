@@ -9,6 +9,7 @@ dependencies {
 	// providedCompile 'javax:javaee-api:7.0'
 	providedCompile 'javax:javaee-web-api:7.0'
 
+    compile 'org.apache.commons:commons-lang3:3.4'
     compile 'commons-codec:commons-codec:1.10'
     compile ':commons-crypto:1.0'
 

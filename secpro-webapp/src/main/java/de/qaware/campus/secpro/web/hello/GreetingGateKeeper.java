@@ -23,38 +23,46 @@
  */
 package de.qaware.campus.secpro.web.hello;
 
-import javax.enterprise.inject.Model;
+import de.qaware.campus.secpro.web.security.Sanitized;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+
+import static de.qaware.campus.secpro.web.security.Sanitized.Type.ECMA_SCRIPT;
 
 /**
- * A simple request scoped named Hello model. Actually the example
- * is taken from the official JavaEE 7 tutorial.
+ * A simple Greeting gate keeper component.
  *
  * @author mario-leander.reimer
  */
-@Model
-public class Hello {
+@ApplicationScoped
+public class GreetingGateKeeper {
 
     @Inject
-    private GreetingGateKeeper greeter;
+    private Greeting greeting;
 
-    private String name;
+    private Collection<String> names = new ArrayList<>();
 
-    public String getName() {
-        return name;
+    /**
+     * Store the given name.
+     *
+     * @param name a name
+     */
+    @Sanitized(type = ECMA_SCRIPT)
+    public String getMessage(String name) {
+        names.add(name);
+        return greeting.getMessage(name);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Returns the list of names.
+     *
+     * @return all the names
+     */
+    public Collection<String> getNames() {
+        return Collections.unmodifiableCollection(names);
     }
-
-    public String getGreeting() {
-        return greeter.getMessage(name);
-    }
-
-    public Collection<String> getAllNames() {
-        return greeter.getNames();
-    }
-
 }

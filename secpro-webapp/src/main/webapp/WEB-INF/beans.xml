@@ -4,6 +4,10 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
        bean-discovery-mode="all">
 
+    <interceptors>
+        <class>de.qaware.campus.secpro.web.security.SanitizedInterceptor</class>
+    </interceptors>
+
     <decorators>
         <class>de.qaware.campus.secpro.web.hello.GreetingSecurityDecorator</class>
     </decorators>

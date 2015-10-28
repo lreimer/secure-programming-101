@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
     <title>Secure Hello Greeting</title>
@@ -24,5 +25,10 @@
         <h:commandButton id="reset" value="Reset" type="reset"/>
         <h:commandButton id="back" value="Back" action="index"/>
     </h:form>
+
+    <h1>All names</h1>
+    <ui:repeat var="name" value="#{hello.allNames}">
+        <h2>#{name}</h2>
+    </ui:repeat>
 </h:body>
 </html>

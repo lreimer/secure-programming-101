@@ -21,40 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.qaware.campus.secpro.web.hello;
+package de.qaware.campus.secpro.web.security;
 
-import javax.enterprise.inject.Model;
-import javax.inject.Inject;
-import java.util.Collection;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
- * A simple request scoped named Hello model. Actually the example
- * is taken from the official JavaEE 7 tutorial.
+ * A simple security interceptor example. Not fully implemented, just
+ * for demonstration purposes.
  *
  * @author mario-leander.reimer
  */
-@Model
-public class Hello {
 
-    @Inject
-    private GreetingGateKeeper greeter;
+@Interceptor
+@Sanitized
+public class SanitizedInterceptor {
 
-    private String name;
+    @AroundInvoke
+    public Object invoke(InvocationContext ctx) throws Exception {
+        Sanitized sanitization = getSanitizedAnnotation(ctx.getMethod());
 
-    public String getName() {
-        return name;
+        // apply the sanitization function
+        Object[] sanitized = Arrays.stream(ctx.getParameters()).map(sanitization.type()).toArray();
+        ctx.setParameters(sanitized);
+
+        return ctx.proceed();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private Sanitized getSanitizedAnnotation(Method m) {
+        Sanitized annotation = m.getAnnotation(Sanitized.class);
+        if (annotation != null) {
+            return annotation;
+        }
 
-    public String getGreeting() {
-        return greeter.getMessage(name);
-    }
+        annotation = m.getDeclaringClass().getAnnotation(Sanitized.class);
+        if (annotation != null) {
+            return annotation;
+        }
 
-    public Collection<String> getAllNames() {
-        return greeter.getNames();
+        throw new IllegalStateException("Unable to find Sanitized annotation.");
     }
-
 }
