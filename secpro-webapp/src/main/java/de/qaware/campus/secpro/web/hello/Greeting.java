@@ -37,7 +37,7 @@ public interface Greeting {
      * may depend on implementation.
      *
      * @param name the name, at least 3 characters
-     * @return the greeting message
+     * @return the greeting message, never null
      */
     @NotNull
     String getMessage(@Size(min = 3) String name);
