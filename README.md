@@ -1,3 +1,6 @@
+[![Dependency Status](https://www.versioneye.com/user/projects/57af1de9b56d6b001694ab24/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57af1de9b56d6b001694ab24)
+[![Build Status](https://travis-ci.org/lreimer/secure-programming-101.svg?branch=master)](https://travis-ci.org/lreimer/secure-programming-101)
+
 # Secure JEE Architecture and Programming 101
 
 The source code for the JavaOne 2015 session on "Secure JEE Architecture and Programming 101".
