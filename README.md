@@ -1,9 +1,16 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/57af1de9b56d6b001694ab24/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57af1de9b56d6b001694ab24)
 [![Build Status](https://travis-ci.org/lreimer/secure-programming-101.svg?branch=master)](https://travis-ci.org/lreimer/secure-programming-101)
 
-# Secure JEE Architecture and Programming 101
+# Secure Architecture and Programming 101
 
-The source code for the JavaOne 2015 session on "Secure JEE Architecture and Programming 101".
+The source code for my session "Secure Architecture and Programming 101". So far this topics had been 
+presented at the following occasions and conferences:
+- JavaOne 2015 
+(https://speakerdeck.com/lreimer/secure-jee-architecture-and-programming-101)
+- IT Security Summer School 2015 
+(http://www.fh-rosenheim.de/die-hochschule/fakultaeten-institute/fakultaet-fuer-informatik/unsere-fakultaet/it-security-summer-school-2015/) 
+- O'Reilly Software Architecture Conference
+(To be presented ...)
 
 
 ## Usage instructions and warnings
@@ -35,3 +42,12 @@ system property definition to your JVM options:
 ```shell
 -Dde.qaware.campus.secpro.password=${ALIAS=secpro_password_alias}
 ```
+
+## Maintainer
+
+M.-Leander Reimer (@lreimer), <mario-leander.reimer@qaware.de>
+
+## License
+
+The software and documentation is provided under the MIT open source license,
+read the `LICENSE` file for details.
