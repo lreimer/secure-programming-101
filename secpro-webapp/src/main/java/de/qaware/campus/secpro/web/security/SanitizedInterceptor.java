@@ -45,7 +45,8 @@ public class SanitizedInterceptor implements Serializable {
         Sanitized sanitization = getSanitizedAnnotation(ctx.getMethod());
 
         // apply the sanitization function
-        Object[] sanitized = Arrays.stream(ctx.getParameters()).map(sanitization.type()).toArray();
+        Object[] parameters = ctx.getParameters();
+        Object[] sanitized = Arrays.stream(parameters).map(sanitization.type()).toArray();
         ctx.setParameters(sanitized);
 
         return ctx.proceed();

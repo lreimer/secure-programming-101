@@ -43,6 +43,22 @@ system property definition to your JVM options:
 -Dde.qaware.campus.secpro.password=${ALIAS=secpro_password_alias}
 ```
 
+
+## Using ZED Attack Proxy to attack
+
+Deploy the application to your Glassfish 4 installation, next start the ZED attack proxy.
+
+Perform attacks on the following URLs:
+
+- http://localhost:8080/secpro-webapp/
+- http://localhost:8080/secpro-webapp/download?src=resources/images/duke.wave.shadow.gif
+
+Now open a browser and type the following URLs:
+
+- http://localhost:8080/secpro-webapp/download?src=WEB-INF/web.xml
+- http://localhost:8080/secpro-webapp/download?src=../__internal/secpro-webapp/secpro-webapp.war
+
+
 ## Maintainer
 
 M.-Leander Reimer (@lreimer), <mario-leander.reimer@qaware.de>
