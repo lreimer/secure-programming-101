@@ -3,6 +3,10 @@ dependencies {
     compile 'commons-fileupload:commons-fileupload:1.2.1'
     compile 'org.apache.httpcomponents:httpclient:4.2.1'
     compile 'com.sun.faces:jsf-api:2.1.10'
-    compile 'org.apache.solr:solr-core:4.6.1'
+    
+    compile 'org.apache.solr:solr-core:9.0.0'
+    
     compile 'com.sun.jersey:jersey-client:1.9.1'
+
+    compile 'io.netty:netty-codec:4.1.77.Final'
 }
